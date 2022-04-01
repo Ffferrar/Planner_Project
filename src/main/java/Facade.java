@@ -1,7 +1,7 @@
 import Settings.Settings;
 import TargetFactory.TargetMainFactory;
 
-public abstract class Facade { //TODO пока что оставлю абстракцией, пока не разберусь, что тут делвть
+public abstract class Facade { //TODO убрать абстракцию
     char userCommand(){
         return 'a';
     }
