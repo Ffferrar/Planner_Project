@@ -1,5 +1,5 @@
-package Settings;
-import Targets.Target;
+package settings;
+import targets.Target;
 public class Settings {
     Target ChangingObject;
     String ChangedName;

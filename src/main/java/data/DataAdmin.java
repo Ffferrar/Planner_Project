@@ -1,10 +1,10 @@
-package Data;
+package data;
 
-import Targets.Target;
+import targets.Target;
 
 public final class DataAdmin {
     private static DataAdmin instance;
-    public String value; //TODO заменить на БД
+    public String value; //TODO заменить потом этот тип на БД
     public static DataAdmin getInstance(String value){
         if (instance == null){
             instance = new DataAdmin();

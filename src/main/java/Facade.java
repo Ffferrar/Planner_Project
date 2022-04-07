@@ -1,5 +1,5 @@
-import Settings.Settings;
-import TargetFactory.TargetMainFactory;
+import settings.Settings;
+import targetFactory.TargetMainFactory;
 
 public abstract class Facade { //TODO убрать абстракцию
     char userCommand(){
