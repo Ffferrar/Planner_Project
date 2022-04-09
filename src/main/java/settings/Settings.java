@@ -1,25 +1,24 @@
 package settings;
 import targets.Target;
-public class Settings {
-    Target ChangingObject;
-    String ChangedName;
-    float ChangedData;
-    int ChangedQueue;
-    int ChangedColor;
 
-    Target changeName(Target object){
-        return object;
+import java.util.GregorianCalendar;
+
+public class Settings {
+
+    public Settings(Target input){
+        this.changingObject = input;
     }
-    Target changeStartDate(Target object){
-        return object;
+    Target changingObject;
+    public void changeName(String name){
+        changingObject.name = name;
     }
-    Target changeEndData(Target object){
-        return object;
+    public void changeEndData(GregorianCalendar input){
+        changingObject.endData = input;
     }
-    Target changeQeue(Target object){
-        return object;
+    public void changeQueue(int input){
+        changingObject.queue = input;
     }
-    Target changeColor(Target object){
-        return object;
+    void changeColor(int input){
+        changingObject.color = input;
     }
 }

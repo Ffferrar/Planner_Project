@@ -9,11 +9,11 @@ public abstract class Target {
         this.queue = queue;
         this.color = color;
     }
-    String name;
-    GregorianCalendar startData;
-    GregorianCalendar endData;
-    int queue;
-    int color;
+    public String name;
+    public GregorianCalendar startData;
+    public GregorianCalendar endData;
+    public int queue;
+    public int color;
     private void isBlocked(boolean status){
 
     }
