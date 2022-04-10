@@ -1,18 +1,12 @@
 package data;
 
+import settings.Settings;
 import targets.Target;
+import utils.TargetsFieldsName;
 
-public final class DataAdmin {
-    private static DataAdmin instance;
-    public String value; //TODO заменить потом этот тип на БД
-    public static DataAdmin getInstance(String value){
-        if (instance == null){
-            instance = new DataAdmin();
-        }
-        return instance;
-    }
+public interface DataAdmin {
 
-    public String createNote(Target object){ //TODO поменять на CSV обьект
-        return "FirstTry";
-    }
+    public void createNote(Target object);
+    public void changeNote(Target object, TargetsFieldsName field);
+    public void deleteNote(Target object);
 }

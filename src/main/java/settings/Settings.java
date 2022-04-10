@@ -21,4 +21,9 @@ public class Settings {
     void changeColor(int input){
         changingObject.color = input;
     }
+    void changeBlocked(boolean input){
+        changingObject.isBlocked(input);
+    }
 }
+
+//TODO после реализации БД в каждом методе вызываем DataAdmin и кидаем туда объект
