@@ -26,7 +26,7 @@ public class DataAdminSQLite implements DataAdmin {
     // храним соединение с БД
     private Connection connection;
 
-    private DataAdminSQLite() throws SQLException{
+    public DataAdminSQLite() throws SQLException{
         DriverManager.registerDriver(new JDBC());
         this.connection = DriverManager.getConnection(STAT_ADDRESS);
     }
@@ -92,4 +92,25 @@ public class DataAdminSQLite implements DataAdmin {
             e.printStackTrace();
         }
     }
+
+    /*public List<Target> getAllObjects() {
+
+        try (Statement statement = this.connection.createStatement()) {
+            // В данный список будем загружать наши продукты, полученные из БД
+            List<Target> targets = new ArrayList<Target>();
+            ResultSet resultSet = statement.executeQuery("SELECT name, startDate, endData, queue, color, blocked FROM DataBase");
+            // Проходимся по нашему resultSet и заносим данные в products
+            while (resultSet.next()) {
+                targets.add(new (resultSet.get("id"),
+                        resultSet.getString("name"),
+                        resultSet.getDouble("price"),
+                        resultSet.getString("category_name")));
+            }
+            return targets;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }*/
 }

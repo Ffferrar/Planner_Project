@@ -21,6 +21,10 @@ public abstract class Target {
         return id;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
     private UUID id;
     public String name;
     public GregorianCalendar startData;
