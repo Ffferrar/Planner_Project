@@ -34,7 +34,7 @@ public class Settings {
         new DataAdminSQLite().changeNote(changingObject, TargetsFieldsName.COLOR);
     }
 
-    void changeBlocked(boolean input) throws SQLException {
+    void changeBlocked(int input) throws SQLException {
         changingObject.isBlocked(input);
         new DataAdminSQLite().changeNote(changingObject, TargetsFieldsName.BLOCKED);
     }

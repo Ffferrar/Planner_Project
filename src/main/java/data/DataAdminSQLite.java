@@ -1,6 +1,7 @@
 package data;
 
 import org.sqlite.JDBC;
+import targets.SuperTarget;
 import targets.Target;
 import utils.TargetsFieldsName;
 
@@ -34,14 +35,15 @@ public class DataAdminSQLite implements DataAdmin {
     @Override
     public void createNote(Target object) {
         try (PreparedStatement statement = this.connection.prepareStatement(
-                "INSERT INTO DataBase('name', 'startDate', 'endData', 'queue', 'color', 'blocked')" +
-                "VALUES(?,?,?,?,?,?)")){
-            statement.setObject(1, object.name);
-            statement.setObject(2, object.startData);
-            statement.setObject(3, object.endData);
-            statement.setObject(4, object.queue);
-            statement.setObject(5, object.color);
-            statement.setObject(6, object.blocked);
+                "INSERT INTO DataBase('id', 'name', 'startDate', 'endData', 'queue', 'color', 'blocked')" +
+                "VALUES(?,?,?,?,?,?, ?)")){
+            statement.setObject(1, object.getId());
+            statement.setObject(2, object.name);
+            statement.setObject(3, object.startData);
+            statement.setObject(4, object.endData);
+            statement.setObject(5, object.queue);
+            statement.setObject(6, object.color);
+            statement.setObject(7, object.blocked);
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -58,10 +60,10 @@ public class DataAdminSQLite implements DataAdmin {
                     statement.setObject(1, object.name);
                     break;
                 case START_DATA:
-                    statement.setObject(1, object.startData);
+                    statement.setObject(1, object.startData.getTime());
                     break;
                 case END_DATA:
-                    statement.setObject(1, object.endData);
+                    statement.setObject(1, object.endData.getTime());
                     break;
                 case QUEUE:
                     statement.setObject(1, object.queue);
@@ -93,18 +95,30 @@ public class DataAdminSQLite implements DataAdmin {
         }
     }
 
-    /*public List<Target> getAllObjects() {
+    public List<Target> getAllObjects() {
 
         try (Statement statement = this.connection.createStatement()) {
             // В данный список будем загружать наши продукты, полученные из БД
             List<Target> targets = new ArrayList<Target>();
-            ResultSet resultSet = statement.executeQuery("SELECT name, startDate, endData, queue, color, blocked FROM DataBase");
+            ResultSet resultSet = statement.executeQuery("SELECT id, name, startDate, endData, queue, color, blocked FROM DataBase");
             // Проходимся по нашему resultSet и заносим данные в products
             while (resultSet.next()) {
-                targets.add(new (resultSet.get("id"),
-                        resultSet.getString("name"),
-                        resultSet.getDouble("price"),
-                        resultSet.getString("category_name")));
+                // Создаем по кусочкам Target
+                //TODO придумать, как разделять на типы Targetов
+                GregorianCalendar startD = new GregorianCalendar();
+                startD.setTime(resultSet.getDate("startDate"));
+
+                GregorianCalendar endD = new GregorianCalendar();
+                endD.setTime(resultSet.getDate("endData"));
+                SuperTarget obj = new SuperTarget(resultSet.getString("name"),
+                        endD,
+                        resultSet.getInt("queue"),
+                        resultSet.getInt("color"));
+                obj.setId(resultSet.getString("id"));
+                obj.startData = startD;
+                obj.blocked = resultSet.getInt("blocked");
+
+                targets.add(obj);
             }
             return targets;
 
@@ -112,5 +126,5 @@ public class DataAdminSQLite implements DataAdmin {
             e.printStackTrace();
             return Collections.emptyList();
         }
-    }*/
+    }
 }

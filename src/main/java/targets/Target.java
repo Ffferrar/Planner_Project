@@ -4,33 +4,33 @@ import java.util.UUID;
 
 public abstract class Target {
     public Target(String name, GregorianCalendar endData, int queue, int color){
-        this.id = UUID.randomUUID();
+        this.id = UUID.randomUUID().toString();
         this.name = name;
         this.startData = new GregorianCalendar();
         this.endData = endData;
         this.queue = queue;
         this.color = color;
-        this.blocked = false;
+        this.blocked = 0; // not boolean because of DB
     }
 
-    public void isBlocked(boolean status){
+    public void isBlocked(int status){
         this.blocked = status;
     }
 
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    private UUID id;
+    private String id;
     public String name;
     public GregorianCalendar startData;
     public GregorianCalendar endData;
     public int queue;
     public int color;
-    public boolean blocked;
+    public int blocked;
 
 }
