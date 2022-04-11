@@ -3,5 +3,5 @@ package targetFactory;
 import targets.Target;
 
 public abstract class TargetMainFactory {
-    abstract Target createTarget();
+    public abstract Target createTarget();
 }
