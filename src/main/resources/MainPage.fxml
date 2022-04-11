@@ -16,17 +16,17 @@
             </font>
          </Text>
 
-         <Button onAction="#click" fx:id="createSTButton" layoutX="219.0" layoutY="128.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="260.0" style="-fx-background-radius: 15; -fx-graphic-text-gap: 1; -fx-text-fill: #000; -fx-background-color: #ffffff; -fx-border-color: #000; -fx-border-radius: 15;" text="Create Small Target">
+         <Button onAction="#click_small" fx:id="createSTButton" layoutX="219.0" layoutY="128.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="260.0" style="-fx-background-radius: 15; -fx-graphic-text-gap: 1; -fx-text-fill: #000; -fx-background-color: #ffffff; -fx-border-color: #000; -fx-border-radius: 15;" text="Create Small Target">
             <font>
                <Font size="22.0" />
             </font>
          </Button>
-         <Button layoutX="219.0" layoutY="200.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="260.0" style="-fx-background-radius: 15; -fx-graphic-text-gap: 1; -fx-text-fill: #000; -fx-background-color: #ffffff; -fx-border-color: #000; -fx-border-radius: 15;" text="Create Middle Target">
+         <Button onAction="#click_middle" fx:id="createMTButton" layoutX="219.0" layoutY="200.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="260.0" style="-fx-background-radius: 15; -fx-graphic-text-gap: 1; -fx-text-fill: #000; -fx-background-color: #ffffff; -fx-border-color: #000; -fx-border-radius: 15;" text="Create Middle Target">
             <font>
                <Font size="22.0" />
             </font>
          </Button>
-         <Button layoutX="219.0" layoutY="269.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="260.0" style="-fx-background-radius: 15; -fx-graphic-text-gap: 1; -fx-text-fill: #000; -fx-background-color: #ffffff; -fx-border-color: #000; -fx-border-radius: 15;" text="Create Super Target">
+         <Button onAction="#click_super" fx:id="createSuperTButton" layoutX="219.0" layoutY="269.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="260.0" style="-fx-background-radius: 15; -fx-graphic-text-gap: 1; -fx-text-fill: #000; -fx-background-color: #ffffff; -fx-border-color: #000; -fx-border-radius: 15;" text="Create Super Target">
             <font>
                <Font size="22.0" />
             </font>
