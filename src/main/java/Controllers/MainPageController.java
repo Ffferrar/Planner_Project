@@ -29,7 +29,7 @@ public class MainPageController{
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CreationPage.fxml"));
         root = loader.load();
         CreationPageController creationPageController = loader.getController();
-        creationPageController.initType(targetType);
+        creationPageController.initType(this.targetType);
 
         Stage stage = new Stage();
         Scene scene = new Scene(root);
@@ -51,7 +51,7 @@ public class MainPageController{
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CreationPage.fxml"));
         root = loader.load();
         CreationPageController creationPageController = loader.getController();
-        creationPageController.initType(targetType);
+        creationPageController.initType(this.targetType);
 
         Stage stage = new Stage();
         Scene scene = new Scene(root);
@@ -73,7 +73,7 @@ public class MainPageController{
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CreationPage.fxml"));
         root = loader.load();
         CreationPageController creationPageController = loader.getController();
-        creationPageController.initType(targetType);
+        creationPageController.initType(this.targetType);
 
         Stage stage = new Stage();
         Scene scene = new Scene(root);
