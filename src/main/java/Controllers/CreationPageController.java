@@ -51,11 +51,14 @@ public class CreationPageController{
         if (this.name != null){
             switch (this.targetType){
                 case Small:
-                    new SmallTargetFactory().createTarget(this.name, new GregorianCalendar(), 0, 0);
+                    new SmallTargetFactory().createTarget(this.name, new GregorianCalendar(), 0, 0, "0");
+                    break;
                 case Middle:
-                    new MiddleTargetFactory().createTarget(this.name, new GregorianCalendar(), 0, 0);
+                    new MiddleTargetFactory().createTarget(this.name, new GregorianCalendar(), 0, 0, "0");
+                    break;
                 case Super:
                     new SuperTargetFactory().createTarget(this.name, new GregorianCalendar(), 0, 0);
+                    break;
             }
             Node source = (Node)  event.getSource();
             Stage stage  = (Stage) source.getScene().getWindow();

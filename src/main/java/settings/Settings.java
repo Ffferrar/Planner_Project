@@ -10,34 +10,36 @@ import java.util.GregorianCalendar;
 
 public class Settings {
 
-    public Settings(Target input){
+    public Settings(Target input) throws SQLException {
         this.changingObject = input;
+        this.dataAdmin = new DataAdminSQLite();
     }
 
     public void changeName(String name) throws SQLException {
         changingObject.name = name;
-        new DataAdminSQLite().changeNote(changingObject, TargetsFieldsName.NAME);
+        dataAdmin.changeNote(changingObject, TargetsFieldsName.NAME);
     }
 
     public void changeEndData(GregorianCalendar input) throws SQLException {
         changingObject.endData = input;
-        new DataAdminSQLite().changeNote(changingObject, TargetsFieldsName.END_DATA);
+        dataAdmin.changeNote(changingObject, TargetsFieldsName.END_DATA);
     }
 
     public void changeQueue(int input) throws SQLException {
         changingObject.queue = input;
-        new DataAdminSQLite().changeNote(changingObject, TargetsFieldsName.QUEUE);
+        dataAdmin.changeNote(changingObject, TargetsFieldsName.QUEUE);
     }
 
     void changeColor(int input) throws SQLException {
         changingObject.color = input;
-        new DataAdminSQLite().changeNote(changingObject, TargetsFieldsName.COLOR);
+        dataAdmin.changeNote(changingObject, TargetsFieldsName.COLOR);
     }
 
     void changeBlocked(int input) throws SQLException {
         changingObject.isBlocked(input);
-        new DataAdminSQLite().changeNote(changingObject, TargetsFieldsName.BLOCKED);
+        dataAdmin.changeNote(changingObject, TargetsFieldsName.BLOCKED);
     }
 
     Target changingObject;
+    DataAdmin dataAdmin;
 }

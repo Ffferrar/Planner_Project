@@ -6,6 +6,7 @@ public abstract class Target {
     public Target(String name, GregorianCalendar endData, int queue, int color){
         this.id = UUID.randomUUID().toString();
         this.name = name;
+        this.parentID = "0";
         this.startData = new GregorianCalendar();
         this.endData = endData;
         this.queue = queue;
@@ -27,6 +28,7 @@ public abstract class Target {
 
     private String id;
     public String name;
+    public String parentID;
     public GregorianCalendar startData;
     public GregorianCalendar endData;
     public int queue;
