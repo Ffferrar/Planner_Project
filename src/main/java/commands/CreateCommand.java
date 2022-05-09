@@ -27,10 +27,13 @@ public class CreateCommand extends Command{
         switch (targetType){
             case Small:
                 new SmallTargetFactory().createTarget(stringField, calendarField, intField, 5, "0");
+                break;
             case Middle:
                 new MiddleTargetFactory().createTarget(stringField, calendarField, intField, 6, "0");
+                break;
             case Super:
                 new SuperTargetFactory().createTarget(stringField, calendarField, intField, 7);
+                break;
         }
     }
 }
