@@ -14,22 +14,24 @@ public class CreateCommand extends Command{
     public int intField;
     public GregorianCalendar calendarField;
     public TargetType targetType;
+    public String parentID;
 
-    public CreateCommand(TargetType targetType, String stringField, int intField, GregorianCalendar calendarField){
+    public CreateCommand(TargetType targetType, String stringField, int intField, GregorianCalendar calendarField, String parentID){
         this.targetType = targetType;
         this.stringField = stringField;
         this.intField = intField;
         this.calendarField = calendarField;
+        this.parentID = parentID;
     }
 
     @Override
     public void execute() throws SQLException {
         switch (targetType){
             case Small:
-                new SmallTargetFactory().createTarget(stringField, calendarField, intField, 5, "0");
+                new SmallTargetFactory().createTarget(stringField, calendarField, intField, 5, parentID);
                 break;
             case Middle:
-                new MiddleTargetFactory().createTarget(stringField, calendarField, intField, 6, "0");
+                new MiddleTargetFactory().createTarget(stringField, calendarField, intField, 6, parentID);
                 break;
             case Super:
                 new SuperTargetFactory().createTarget(stringField, calendarField, intField, 7);
