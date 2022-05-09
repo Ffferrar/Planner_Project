@@ -35,8 +35,8 @@ public class DataAdminSQLite implements DataAdmin {
     @Override
     public void createNote(Target object) {
         try (PreparedStatement statement = this.connection.prepareStatement(
-                "INSERT INTO DataBase('id', 'name', 'startDate', 'endData', 'queue', 'color', 'blocked')" +
-                "VALUES(?,?,?,?,?,?,?)")){
+                "INSERT INTO DataBase('id', 'name', 'startDate', 'endData', 'queue', 'color', 'blocked', 'parentID')" +
+                "VALUES(?,?,?,?,?,?,?,?)")){
             statement.setObject(1, object.getId());
             statement.setObject(2, object.name);
             statement.setObject(3, object.startData.getTime());
@@ -44,6 +44,7 @@ public class DataAdminSQLite implements DataAdmin {
             statement.setObject(5, object.queue);
             statement.setObject(6, object.color);
             statement.setObject(7, object.blocked);
+            statement.setObject(8, object.parentID);
             statement.execute();
         } catch (SQLException e){
             e.printStackTrace();
@@ -75,6 +76,9 @@ public class DataAdminSQLite implements DataAdmin {
                     break;
                 case BLOCKED:
                     statement.setObject(1, object.blocked);
+                    break;
+                case PARENT_ID:
+                    statement.setObject(1, object.parentID);
                     break;
 
             }
@@ -119,6 +123,7 @@ public class DataAdminSQLite implements DataAdmin {
                 obj.setId(resultSet.getString("id"));
                 obj.startData = startD;
                 obj.blocked = resultSet.getInt("blocked");
+                obj.parentID = resultSet.getString("parentID");
 
                 targets.add(obj);
             }
