@@ -101,12 +101,12 @@ public class DataAdminSQLite implements DataAdmin {
         }
     }
 
-    public List<Target> getAllObjects() {
+    public List<Target> getAllObjects(String parentID) {
 
         try (Statement statement = this.connection.createStatement()) {
             // В данный список будем загружать наши продукты, полученные из БД
             List<Target> targets = new ArrayList<Target>();
-            ResultSet resultSet = statement.executeQuery("SELECT id, name, startDate, endData, queue, color, blocked FROM DataBase");
+            ResultSet resultSet = statement.executeQuery("SELECT id, name, startDate, endData, queue, color, blocked, parentID WHERE parentID = "+parentID+" FROM DataBase");
             // Проходимся по нашему resultSet и заносим данные в products
             while (resultSet.next()) {
                 // Создаем по кусочкам Target
@@ -134,4 +134,36 @@ public class DataAdminSQLite implements DataAdmin {
             return Collections.emptyList();
         }
     }
+ /*
+    public Target getById(String id){
+        try (Statement statement = this.connection.createStatement()) {
+            // В данный список будем загружать наши продукты, полученные из БД
+            List<Target> targets = new ArrayList<Target>();
+            ResultSet resultSet = statement.executeQuery("SELECT id, name, startDate, endData, queue, color, blocked, parentID WHERE parentID = "+parentID+" FROM DataBase");
+            // Проходимся по нашему resultSet и заносим данные в products
+            while (resultSet.next()) {
+                // Создаем по кусочкам Target
+                //TODO придумать, как разделять на типы Targetов
+                GregorianCalendar startD = new GregorianCalendar();
+                startD.setTime(resultSet.getDate("startDate"));
+
+                GregorianCalendar endD = new GregorianCalendar();
+                endD.setTime(resultSet.getDate("endData"));
+                SuperTarget obj = new SuperTarget(resultSet.getString("name"),
+                        endD,
+                        resultSet.getInt("queue"),
+                        resultSet.getInt("color"));
+                obj.setId(resultSet.getString("id"));
+                obj.startData = startD;
+                obj.blocked = resultSet.getInt("blocked");
+                obj.parentID = resultSet.getString("parentID");
+
+                targets.add(obj);
+            }
+            return targets;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return Collections.emptyList();
+        }
+    }*/
 }
