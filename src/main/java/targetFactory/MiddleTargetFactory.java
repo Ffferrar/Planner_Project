@@ -16,8 +16,8 @@ public class MiddleTargetFactory {
         this.dataAdmin = new DataAdminSQLite();
     }
 
-    public Target createTarget(String name, GregorianCalendar endData, int queue, int color) throws SQLException {
-        MiddleTarget T = new MiddleTarget(name, endData, queue, color);
+    public Target createTarget(String name, GregorianCalendar endData, int queue, int color, String parentID) throws SQLException {
+        MiddleTarget T = new MiddleTarget(name, endData, queue, color, parentID);
         dataAdmin.createNote(T);
         return T;
     }
