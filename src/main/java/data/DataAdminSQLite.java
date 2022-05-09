@@ -3,6 +3,7 @@ package data;
 import org.sqlite.JDBC;
 import targets.SuperTarget;
 import targets.Target;
+import utils.TargetType;
 import utils.TargetsFieldsName;
 
 import java.lang.reflect.Field;
@@ -33,7 +34,7 @@ public class DataAdminSQLite implements DataAdmin {
     }
 
     @Override
-    public void createNote(Target object) {
+    public void createNote(Target object, TargetType targetType) {
         try (PreparedStatement statement = this.connection.prepareStatement(
                 "INSERT INTO DataBase('id', 'name', 'startDate', 'endData', 'queue', 'color', 'blocked', 'parentID')" +
                 "VALUES(?,?,?,?,?,?,?,?)")){
