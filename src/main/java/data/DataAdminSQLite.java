@@ -55,12 +55,18 @@ public class DataAdminSQLite implements DataAdmin {
                 case Small:
                     statement.setObject(9, object.status.ordinal());
                     statement.setObject(10, targetType.Small.ordinal());
+                    break;
+
                 case Middle:
                     statement.setObject(9, CaseName.TODO_CASE.ordinal());
                     statement.setObject(10, targetType.Middle.ordinal());
+                    break;
+
                 case Super:
                     statement.setObject(9,  CaseName.TODO_CASE.ordinal());
                     statement.setObject(10, targetType.Super.ordinal());
+                    break;
+
             }
 
             statement.execute();
@@ -98,6 +104,9 @@ public class DataAdminSQLite implements DataAdmin {
                 case PARENT_ID:
                     statement.setObject(1, object.parentID);
                     break;
+                case STATUS:
+                    statement.setObject(1, object.status.ordinal());
+                    break;
 
             }
 
@@ -119,12 +128,12 @@ public class DataAdminSQLite implements DataAdmin {
         }
     }
 
-    public List<Target> getAllObjects(String parentID, TargetType targetType) {
+    public List<Target> getAllObjects(String parentID) {
 
         try (Statement statement = this.connection.createStatement()) {
             // В данный список будем загружать наши продукты, полученные из БД
             List<Target> targets = new ArrayList<Target>();
-            ResultSet resultSet = statement.executeQuery("SELECT id, name, startDate, endData, queue, color, blocked, parentID WHERE parentID = "+parentID+" FROM DataBase");
+            ResultSet resultSet = statement.executeQuery("SELECT id, name, startDate, endData, queue, color, blocked, parentID, status, targetType WHERE parentID = "+parentID+" FROM DataBase");
             // Проходимся по нашему resultSet и заносим данные в products
             while (resultSet.next()) {
 
@@ -136,7 +145,7 @@ public class DataAdminSQLite implements DataAdmin {
                 GregorianCalendar endD = new GregorianCalendar();
                 endD.setTime(resultSet.getDate("endData"));
 
-                switch(targetType){
+                switch(TargetType.values()[resultSet.getInt("targetType")]){
 
                     case Small:
                         this.obj = new SmallTarget(resultSet.getString("name"),
@@ -144,6 +153,7 @@ public class DataAdminSQLite implements DataAdmin {
                                 resultSet.getInt("queue"),
                                 resultSet.getInt("color"),
                                 resultSet.getString("parentID"));
+                        obj.status = CaseName.values()[resultSet.getInt("status")];
                         break;
                     case Super:
                         this.obj = new SuperTarget(resultSet.getString("name"),
@@ -178,19 +188,18 @@ public class DataAdminSQLite implements DataAdmin {
 
     public Target getById(String id){
         try (Statement statement = this.connection.createStatement()) {
-            // В данный список будем загружать наши продукты, полученные из БД
-            ResultSet resultSet = statement.executeQuery("SELECT id, name, startDate, endData, queue, color, blocked, parentID WHERE id = "+id+" FROM DataBase");
+            ResultSet resultSet = statement.executeQuery("SELECT id, name, startDate, endData, queue, color, blocked, parentID, status, targetType WHERE id = "+id+" FROM DataBase");
             // Проходимся по нашему resultSet и заносим данные в products
             while (resultSet.next()) {
+
                 // Создаем по кусочкам Target
-                //TODO придумать, как разделять на типы Targetов
                 GregorianCalendar startD = new GregorianCalendar();
                 startD.setTime(resultSet.getDate("startDate"));
 
                 GregorianCalendar endD = new GregorianCalendar();
                 endD.setTime(resultSet.getDate("endData"));
 
-                switch(targetType){
+                switch(TargetType.values()[resultSet.getInt("targetType")]){
 
                     case Small:
                         this.obj = new SmallTarget(resultSet.getString("name"),
@@ -198,6 +207,7 @@ public class DataAdminSQLite implements DataAdmin {
                                 resultSet.getInt("queue"),
                                 resultSet.getInt("color"),
                                 resultSet.getString("parentID"));
+                        obj.status = CaseName.values()[resultSet.getInt("status")];
                         break;
                     case Super:
                         this.obj = new SuperTarget(resultSet.getString("name"),
@@ -219,11 +229,13 @@ public class DataAdminSQLite implements DataAdmin {
                 obj.startData = startD;
                 obj.blocked = resultSet.getInt("blocked");
                 obj.parentID = resultSet.getString("parentID");
+
             }
-            return targets;
+            return obj;
+
         } catch (SQLException e) {
             e.printStackTrace();
-            return Collections.emptyList();
+            return null;
         }
     }
 }

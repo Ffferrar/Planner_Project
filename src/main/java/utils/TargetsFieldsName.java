@@ -8,5 +8,6 @@ public enum TargetsFieldsName {
     QUEUE,
     COLOR,
     BLOCKED,
-    PARENT_ID
+    PARENT_ID,
+    STATUS
 }
