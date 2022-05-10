@@ -1,4 +1,6 @@
 package targets;
+import utils.CaseName;
+
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
@@ -34,5 +36,6 @@ public abstract class Target {
     public int queue;
     public int color;
     public int blocked;
+    public CaseName status;
 
 }
