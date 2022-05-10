@@ -10,6 +10,5 @@ public abstract class Command {
     public int intField;
     public GregorianCalendar calendarField;
     public TargetType targetType;
-    public abstract void execute() throws SQLException;
 
 }

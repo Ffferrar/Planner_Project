@@ -30,12 +30,12 @@ public class Settings {
         dataAdmin.changeNote(changingObject, TargetsFieldsName.QUEUE);
     }
 
-    void changeColor(int input) throws SQLException {
+    public void changeColor(int input) throws SQLException {
         changingObject.color = input;
         dataAdmin.changeNote(changingObject, TargetsFieldsName.COLOR);
     }
 
-    void changeBlocked(int input) throws SQLException {
+    public void changeBlocked(int input) throws SQLException {
         changingObject.isBlocked(input);
         dataAdmin.changeNote(changingObject, TargetsFieldsName.BLOCKED);
     }

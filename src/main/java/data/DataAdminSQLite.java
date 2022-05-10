@@ -178,6 +178,7 @@ public class DataAdminSQLite implements DataAdmin {
 
                 targets.add(obj);
             }
+            this.obj = null;
             return targets;
 
         } catch (SQLException e) {

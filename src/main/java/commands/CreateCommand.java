@@ -24,7 +24,6 @@ public class CreateCommand extends Command{
         this.parentID = parentID;
     }
 
-    @Override
     public void execute() throws SQLException {
         switch (targetType){
             case Small:
