@@ -7,7 +7,6 @@ import utils.TargetsFieldsName;
 import java.sql.SQLException;
 import java.util.GregorianCalendar;
 
-//TODO реализация в следующей итерации
 public class ChangeCommand extends Command{
 
     public Settings settings;
