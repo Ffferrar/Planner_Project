@@ -10,10 +10,12 @@ public class DeleteCommand extends Command {
 
     public Target obj;
     public DataAdmin dataAdmin;
+
     public DeleteCommand(Target obj) throws SQLException {
         this.obj = obj;
         this.dataAdmin = new DataAdminSQLite();
     }
+
     public void execute(){
         this.dataAdmin.deleteNote(this.obj);
     }
