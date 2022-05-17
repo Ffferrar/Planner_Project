@@ -16,7 +16,7 @@ public class ShowCommand extends Command{
         this.dataAdmin = new DataAdminSQLite();
 
     }
-    
+
     public List<Target> execute(){
         return this.dataAdmin.getAllObjects(this.parentID);
     }

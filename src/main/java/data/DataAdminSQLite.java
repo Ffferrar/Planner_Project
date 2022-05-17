@@ -53,7 +53,7 @@ public class DataAdminSQLite implements DataAdmin {
 
             switch(targetType){
                 case Small:
-                    statement.setObject(9, object.status.ordinal());
+                    statement.setObject(9,  CaseName.TODO_CASE.ordinal());
                     statement.setObject(10, targetType.Small.ordinal());
                     break;
 
@@ -130,10 +130,11 @@ public class DataAdminSQLite implements DataAdmin {
 
     public List<Target> getAllObjects(String parentID) {
 
-        try (Statement statement = this.connection.createStatement()) {
+        try (PreparedStatement statement = this.connection.prepareStatement("SELECT id, name, startDate, endData, queue, color, blocked, parentID, status, targetType FROM DataBase WHERE parentID = ?")) {
             // В данный список будем загружать наши продукты, полученные из БД
             List<Target> targets = new ArrayList<Target>();
-            ResultSet resultSet = statement.executeQuery("SELECT id, name, startDate, endData, queue, color, blocked, parentID, status, targetType WHERE parentID = "+parentID+" FROM DataBase");
+            statement.setObject(1, parentID);
+            ResultSet resultSet = statement.executeQuery();
             // Проходимся по нашему resultSet и заносим данные в products
             while (resultSet.next()) {
 
@@ -154,6 +155,7 @@ public class DataAdminSQLite implements DataAdmin {
                                 resultSet.getInt("color"),
                                 resultSet.getString("parentID"));
                         obj.status = CaseName.values()[resultSet.getInt("status")];
+
                         break;
                     case Super:
                         this.obj = new SuperTarget(resultSet.getString("name"),
