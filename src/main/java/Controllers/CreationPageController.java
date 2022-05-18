@@ -28,7 +28,13 @@ public class CreationPageController{
     public void initType(TargetType type) {
         this.targetType = type;
     }
+    public void initParentID(String parentID) {
+        this.parentID = parentID;
+    }
+
     TargetType targetType;
+    String parentID;
+
 
     String name = null;
     GregorianCalendar date;
@@ -60,17 +66,9 @@ public class CreationPageController{
     private void click(ActionEvent event) throws SQLException {
 
         if (this.name != null){
-            switch (this.targetType){
-                case Small:
-                    new SmallTargetFactory().createTarget(this.name, this.date, 0, 0, "0");
-                    break;
-                case Middle:
-                    new MiddleTargetFactory().createTarget(this.name, this.date, 0, 0, "0");
-                    break;
-                case Super:
-                    new SuperTargetFactory().createTarget(this.name, this.date, 0, 0);
-                    break;
-            }
+
+            new CreateCommand(targetType, this.name, 0, this.date, parentID).execute();
+
             Node source = (Node)  event.getSource();
             Stage stage  = (Stage) source.getScene().getWindow();
             stage.close();
