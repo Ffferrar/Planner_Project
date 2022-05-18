@@ -10,11 +10,7 @@ import java.sql.SQLException;
 import java.util.GregorianCalendar;
 
 public class CreateCommand extends Command{
-    public String stringField;
-    public int intField;
-    public GregorianCalendar calendarField;
-    public TargetType targetType;
-    public String parentID;
+
 
     public CreateCommand(TargetType targetType, String stringField, int intField, GregorianCalendar calendarField, String parentID){
         this.targetType = targetType;
@@ -24,7 +20,6 @@ public class CreateCommand extends Command{
         this.parentID = parentID;
     }
 
-    @Override
     public void execute() throws SQLException {
         switch (targetType){
             case Small:
