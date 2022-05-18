@@ -66,14 +66,14 @@ public class MiddlePageController {
 
             int finalI = i;
             btn.setOnAction((ActionEvent event) -> {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MiddlePageController.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("LittlePage.fxml"));
                 try {
-                    root = loader.load();
+                    this.root = loader.load();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                MiddlePageController middlePageController = loader.getController();
-                middlePageController.initParentID(list.get(finalI).parentID);
+                SmallPageController smallPageController = loader.getController();
+                smallPageController.initParentID(list.get(finalI).getId());
 
                 Stage stage = (Stage) btn.getScene().getWindow();
                 stage.setScene(new Scene(root, 529, 329));

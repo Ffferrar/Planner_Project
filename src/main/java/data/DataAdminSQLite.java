@@ -190,8 +190,9 @@ public class DataAdminSQLite implements DataAdmin {
     }
 
     public Target getById(String id){
-        try (Statement statement = this.connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery("SELECT id, name, startDate, endData, queue, color, blocked, parentID, status, targetType WHERE id = "+id+" FROM DataBase");
+        try (PreparedStatement statement = this.connection.prepareStatement("SELECT id, name, startDate, endData, queue, color, blocked, parentID, status, targetType FROM DataBase WHERE id = ?")) {
+            statement.setObject(1, id);
+            ResultSet resultSet = statement.executeQuery();
             // Проходимся по нашему resultSet и заносим данные в products
             while (resultSet.next()) {
 

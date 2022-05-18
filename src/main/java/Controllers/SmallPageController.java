@@ -106,7 +106,11 @@ public class SmallPageController {
         Stage stage  = (Stage) source.getScene().getWindow();
         stage.close();
 
-        DataPageController dataPageController = loader.getController();
+        Target middleTarget =  new ShowCommand(this.parentID).executeById(this.parentID);
+        MiddlePageController middlePageController = loader.getController();
+
+
+        middlePageController.initParentID(middleTarget.parentID);
 
         Stage stage1 = new Stage();
         Scene scene = new Scene(root);
