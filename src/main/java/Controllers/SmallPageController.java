@@ -46,6 +46,7 @@ public class SmallPageController {
     }
 
     private void initData() throws SQLException {
+        usersData = FXCollections.observableArrayList();
         List<Target> list =  new ShowCommand(this.parentID).execute();
         for (int i = 0; i < list.size(); i++){
             String text;

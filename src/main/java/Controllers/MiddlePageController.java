@@ -46,6 +46,7 @@ public class MiddlePageController {
     }
 
     private void initData() throws SQLException {
+        usersData = FXCollections.observableArrayList();
         List<Target> list =  new ShowCommand(this.parentID).execute();
         for (int i = 0; i < list.size(); i++){
             final Button btn = new Button();
@@ -56,7 +57,7 @@ public class MiddlePageController {
             GregorianCalendar actualData = new GregorianCalendar();
             int dateResult = actualData.compareTo(list.get(i).endData);
 
-            if (dateResult > 0){
+            if (dateResult < 0){
                 btn.setStyle("-fx-background-color: green");
             }
             else{btn.setStyle("-fx-background-color: orange");}
