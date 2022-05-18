@@ -1,4 +1,6 @@
 package targets;
+import utils.CaseName;
+
 import java.util.GregorianCalendar;
 import java.util.UUID;
 
@@ -6,6 +8,7 @@ public abstract class Target {
     public Target(String name, GregorianCalendar endData, int queue, int color){
         this.id = UUID.randomUUID().toString();
         this.name = name;
+        this.parentID = "Super";
         this.startData = new GregorianCalendar();
         this.endData = endData;
         this.queue = queue;
@@ -27,10 +30,12 @@ public abstract class Target {
 
     private String id;
     public String name;
+    public String parentID;
     public GregorianCalendar startData;
     public GregorianCalendar endData;
     public int queue;
     public int color;
     public int blocked;
+    public CaseName status;
 
 }

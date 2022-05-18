@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import utils.TargetType;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class MainPageController{
     private Parent root;
@@ -82,5 +83,23 @@ public class MainPageController{
         stage.setHeight(329);
         stage.show();
     }
+
+    @FXML
+    private Button showButton;
+
+    @FXML
+    private void click_show(ActionEvent event) throws IOException, SQLException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ShowPage.fxml"));
+        root = loader.load();
+        DataPageController dataPageController = loader.getController();
+        dataPageController.initialize();
+
+        Stage stage = (Stage) showButton.getScene().getWindow();
+        stage.setScene(new Scene(root, 529, 329));
+
+    }
+
+
 
 }

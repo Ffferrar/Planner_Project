@@ -6,16 +6,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
-import targetFactory.SuperTargetFactory;
-import targets.SuperTarget;
 import targets.Target;
 import utils.TargetType;
 
@@ -25,7 +21,13 @@ import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class DataPageController {
+public class MiddlePageController {
+    String parentID;
+
+    public void initParentID(String parentID){
+        this.parentID = parentID;
+    }
+
     private ObservableList<Button> usersData = FXCollections.observableArrayList();
     private Parent root;
     TargetType targetType;
@@ -45,7 +47,7 @@ public class DataPageController {
 
     private void initData() throws SQLException {
         usersData = FXCollections.observableArrayList();
-        List<Target> list =  new ShowCommand("Super").execute();
+        List<Target> list =  new ShowCommand(this.parentID).execute();
         for (int i = 0; i < list.size(); i++){
             final Button btn = new Button();
 
@@ -64,21 +66,22 @@ public class DataPageController {
 
             int finalI = i;
             btn.setOnAction((ActionEvent event) -> {
-                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("MiddlePage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("LittlePage.fxml"));
                 try {
                     this.root = loader.load();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                MiddlePageController middlePageController = loader.getController();
-                middlePageController.initParentID(list.get(finalI).getId());
+                SmallPageController smallPageController = loader.getController();
+                smallPageController.initParentID(list.get(finalI).getId());
 
                 Stage stage = (Stage) btn.getScene().getWindow();
                 stage.setScene(new Scene(root, 529, 329));
-                    });
+            });
 
             usersData.add(btn);
         }
+
 
     }
 
@@ -86,13 +89,14 @@ public class DataPageController {
     private Button createButton;
 
     @FXML
-    private void click_super(ActionEvent event) throws IOException {
-        this.targetType = TargetType.Super;
+    private void click_middle(ActionEvent event) throws IOException {
+        this.targetType = TargetType.Middle;
 
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("CreationPage.fxml"));
         root = loader.load();
         CreationPageController creationPageController = loader.getController();
         creationPageController.initType(targetType);
+        creationPageController.initParentID(parentID);
 
         Stage stage = new Stage();
         Scene scene = new Scene(root);
@@ -110,4 +114,27 @@ public class DataPageController {
     private void click_reload(ActionEvent event) throws IOException, SQLException {
         initialize();
     }
+
+    @FXML
+    private Button returnButton;
+
+    @FXML
+    private void click_return(ActionEvent event) throws IOException, SQLException {
+        FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource("ShowPage.fxml"));
+        root = loader.load();
+
+        Node source = (Node)  event.getSource();
+        Stage stage  = (Stage) source.getScene().getWindow();
+        stage.close();
+
+        DataPageController dataPageController = loader.getController();
+
+        Stage stage1 = new Stage();
+        Scene scene = new Scene(root);
+        stage1.setScene(scene);
+        stage1.setWidth(529);
+        stage1.setHeight(329);
+        stage1.show();
+    }
+
 }

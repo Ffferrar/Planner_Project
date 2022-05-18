@@ -20,6 +20,7 @@ import utils.TargetType;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.ZoneId;
 import java.util.GregorianCalendar;
 
 public class CreationPageController{
@@ -27,7 +28,13 @@ public class CreationPageController{
     public void initType(TargetType type) {
         this.targetType = type;
     }
+    public void initParentID(String parentID) {
+        this.parentID = parentID;
+    }
+
     TargetType targetType;
+    String parentID;
+
 
     String name = null;
     GregorianCalendar date;
@@ -43,20 +50,25 @@ public class CreationPageController{
     }
 
     @FXML
+    private DatePicker dataField = new DatePicker();
+
+    @FXML
+    private void data(ActionEvent event) throws IOException {
+        if ((dataField.getValue() != null)) {
+            this.date = GregorianCalendar.from(dataField.getValue().atStartOfDay(ZoneId.systemDefault()));
+        }
+    }
+
+    @FXML
     private Button confirmButton;
 
     @FXML
     private void click(ActionEvent event) throws SQLException {
 
         if (this.name != null){
-            switch (this.targetType){
-                case Small:
-                    new SmallTargetFactory().createTarget(this.name, new GregorianCalendar(), 0, 0);
-                case Middle:
-                    new MiddleTargetFactory().createTarget(this.name, new GregorianCalendar(), 0, 0);
-                case Super:
-                    new SuperTargetFactory().createTarget(this.name, new GregorianCalendar(), 0, 0);
-            }
+
+            new CreateCommand(targetType, this.name, 0, this.date, parentID).execute();
+
             Node source = (Node)  event.getSource();
             Stage stage  = (Stage) source.getScene().getWindow();
             stage.close();

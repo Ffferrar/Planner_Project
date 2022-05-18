@@ -31,7 +31,7 @@
                <Font size="22.0" />
             </font>
          </Button>
-         <Button layoutX="219.0" layoutY="394.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="260.0" style="-fx-background-radius: 15; -fx-graphic-text-gap: 1; -fx-text-fill: #fff; -fx-background-color: #333444; -fx-border-color: #000; -fx-border-radius: 15;" text="All Targets">
+         <Button onAction="#click_show" fx:id="showButton"  layoutX="219.0" layoutY="394.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="260.0" style="-fx-background-radius: 15; -fx-graphic-text-gap: 1; -fx-text-fill: #fff; -fx-background-color: #333444; -fx-border-color: #000; -fx-border-radius: 15;" text="All Targets">
             <font>
                <Font size="22.0" />
             </font>
