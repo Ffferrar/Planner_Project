@@ -1,4 +1,9 @@
 # Planner_Project
+
+//Проект в рамках курса "Технологии программирования"
+Небольшое декстопное приложение для заметок с фронтом на JavaFX и базой данных в SQLite.
+
+
 Для запуска проекта в Intelijidea нужно установить Run Application.
 
 Run Application: Application;
